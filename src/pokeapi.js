@@ -9,6 +9,10 @@ function getRandomNumbers(amount, start, end) {
   return list;
 }
 
+function capitalizeFirstLetter(string) {
+  return string[0].toUpperCase() + string.slice(1);
+}
+
 async function getPokemon(url) {
   const response = await fetch(url);
   if (!response.ok) {
@@ -18,7 +22,7 @@ async function getPokemon(url) {
 
   const data = await response.json();
   const pokemon = {
-    name: data.name,
+    name: capitalizeFirstLetter(data.name),
     sprite: data.sprites.versions["generation-i"]["red-blue"].front_gray,
   };
   return pokemon;
