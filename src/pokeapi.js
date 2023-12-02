@@ -1,7 +1,7 @@
-function getRandomNumbers(amount, start, end) {
+function getRandomNumbers(amount, length) {
   const list = [];
   while (list.length < amount) {
-    const num = Math.floor(Math.random() * (end - start + 1) + start);
+    const num = Math.floor(Math.random() * length);
     if (!list.includes(num)) {
       list.push(num);
     }
@@ -9,8 +9,22 @@ function getRandomNumbers(amount, start, end) {
   return list;
 }
 
-function capitalizeFirstLetter(string) {
-  return string[0].toUpperCase() + string.slice(1);
+function formatName(string) {
+  let newString = string;
+  if (string.includes("mime")) {
+    newString = newString.replace("-", ". ");
+  } else if (string.includes("-") && string.includes("nido")) {
+    newString = newString.replace("-", " (");
+    newString += ")";
+  }
+  return newString.replace(/(?<=\b)\w/g, (match) => match.toUpperCase());
+}
+
+function getSprite(data) {
+  if (data.sprites.versions["generation-i"]["red-blue"].front_gray) {
+    return data.sprites.versions["generation-i"]["red-blue"].front_gray;
+  }
+  return data.sprites.front_default;
 }
 
 async function getPokemon(url) {
@@ -22,17 +36,15 @@ async function getPokemon(url) {
 
   const data = await response.json();
   const pokemon = {
-    name: capitalizeFirstLetter(data.name),
-    sprite: data.sprites.versions["generation-i"]["red-blue"].front_gray,
+    name: formatName(data.name),
+    sprite: getSprite(data),
   };
   return pokemon;
 }
 
-export default async function getList(amount = 12, start = 1, end = 151) {
+export default async function getList(amount = 12, offset = 0, limit = 151) {
   const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=${end + start - 1}&offset=${
-      start - 1
-    }`,
+    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
   );
   if (!response.ok) {
     const message = `Error fetching pokemon range: ${response.status}`;
@@ -40,7 +52,7 @@ export default async function getList(amount = 12, start = 1, end = 151) {
   }
 
   const data = await response.json();
-  const indexList = getRandomNumbers(amount, start, end);
+  const indexList = getRandomNumbers(amount, data.results.length);
   return Promise.all(
     indexList.map((index) => getPokemon(data.results[index].url)),
   )
