@@ -1,7 +1,7 @@
 function getRandomNumbers(amount, start, end) {
   const list = [];
   while (list.length < amount) {
-    const num = Math.round(Math.random() * (end - start));
+    const num = Math.floor(Math.random() * (end - start + 1) + start);
     if (!list.includes(num)) {
       list.push(num);
     }
