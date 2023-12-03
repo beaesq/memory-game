@@ -13,19 +13,31 @@ function randomizeOrder(length) {
   return tempOrder;
 }
 
-export default function CardContainer({ list }) {
+export default function CardContainer({ list, increaseScore, resetScore }) {
   const [clicked, setClicked] = useState([]);
   // loading text
   if (list.length === 0) {
     return <p className="loading">Loading...</p>;
   }
   const order = randomizeOrder(list.length);
-  console.log(`clicked: ${clicked}`);
 
-  function handleClick(value) {
+  function addToClicked(value) {
     const newClicked = clicked.slice();
     newClicked.push(value);
     setClicked(newClicked);
+  }
+
+  function handleClick(value) {
+    if (clicked.length % list.length === 0) {
+      increaseScore();
+      setClicked([value]);
+    } else if (clicked.includes(value)) {
+      setClicked([]);
+      resetScore();
+    } else {
+      addToClicked(value);
+      increaseScore();
+    }
   }
 
   return (
@@ -47,4 +59,6 @@ CardContainer.propTypes = {
   list: PropTypes.arrayOf(
     PropTypes.shape({ name: PropTypes.string, sprite: PropTypes.string }),
   ).isRequired,
+  increaseScore: PropTypes.func.isRequired,
+  resetScore: PropTypes.func.isRequired,
 };

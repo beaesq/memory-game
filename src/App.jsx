@@ -5,6 +5,7 @@ import CardContainer from "./components/CardContainer";
 
 function App() {
   const [list, setList] = useState([]);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     getList().then((response) => {
@@ -12,9 +13,22 @@ function App() {
     });
   }, []);
 
+  function increaseScore() {
+    setScore(score + 1);
+  }
+
+  function resetScore() {
+    setScore(0);
+  }
+
   return (
     <div>
-      <CardContainer list={list} />
+      <p>Score: {score}</p>
+      <CardContainer
+        list={list}
+        increaseScore={() => increaseScore()}
+        resetScore={() => resetScore()}
+      />
     </div>
   );
 }
