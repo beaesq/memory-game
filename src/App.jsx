@@ -35,17 +35,22 @@ function App() {
     <>
       <header>
         <h1>Generation I Pokémon Memory Game</h1>
+        <p className="instructions">
+          Try not to click on the same Pokémon twice!
+        </p>
         <p className="score">Score: {score}</p>
         <p className="high-score">Best Score: {bestScore}</p>
         <button type="button" onClick={handleResetClick}>
           Reset Pokémon
         </button>
       </header>
-      <CardContainer
-        list={list}
-        increaseScore={() => increaseScore()}
-        resetScore={() => resetScore()}
-      />
+      <main>
+        <CardContainer
+          list={list}
+          increaseScore={() => increaseScore()}
+          resetScore={() => resetScore()}
+        />
+      </main>
     </>
   );
 }

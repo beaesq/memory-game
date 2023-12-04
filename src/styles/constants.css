@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+body {
+  --font: "Press Start 2P", mono;
+  --text-color: #181010;
+  --accent-color: #f7b58c;
+  --hover-color: #84739c;
+  --border-color: #181010;
+  --background-color: #ffefff;
+}

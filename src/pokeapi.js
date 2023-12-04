@@ -22,7 +22,7 @@ function formatName(string) {
 
 function getSprite(data) {
   if (data.sprites.versions["generation-i"]["red-blue"].front_gray) {
-    return data.sprites.versions["generation-i"]["red-blue"].front_gray;
+    return data.sprites.versions["generation-i"]["red-blue"].front_transparent;
   }
   return data.sprites.front_default;
 }

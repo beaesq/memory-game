@@ -1,0 +1,186 @@
+@import "./constants.css";
+
+/*=====
+  RESET
+  =====*/
+
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+img,
+b,
+u,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+footer,
+header,
+menu,
+nav,
+section,
+summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+/*====
+  MAIN
+  ====*/
+
+body {
+  font-family: var(--font);
+  background-color: var(--background-color);
+  margin: 3em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  max-width: 1000px;
+  display: grid;
+  grid-template-areas:
+    "title title title"
+    "instructions instructions reset"
+    "score high-score reset";
+  align-items: center;
+  row-gap: 1em;
+  column-gap: 3em;
+  grid-template-columns: auto auto fit-content;
+}
+
+header > h1 {
+  font-size: 1.875em;
+  color: var(--text-color);
+  grid-area: title;
+  text-align: center;
+}
+
+header > p {
+  font-size: 1em;
+  color: var(--text-color);
+}
+
+.instructions {
+  grid-area: instructions;
+  justify-self: center;
+}
+
+.score {
+  grid-area: score;
+  justify-self: end;
+}
+
+.high-score {
+  grid-area: high-score;
+  justify-self: start;
+}
+
+header > button {
+  grid-area: reset;
+  padding: 1em 1.5em;
+}
+
+/*=============
+  CARDS & RESET
+  =============*/
+
+main {
+  margin-top: 3em;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 3em;
+}
+
+button {
+  font-family: var(--font);
+  font-size: 1em;
+
+  border-radius: 4px;
+  padding: 1em;
+  line-height: 1em;
+  margin: auto;
+  background: var(--background-color);
+  border: 2px solid var(--background-color);
+  box-shadow:
+    0 2px 0 2px var(--border-color),
+    inset 0 2px 0 2px var(--border-color),
+    0 0 0 2px var(--border-color),
+    inset 0 0 0 2px var(--border-color);
+}
+
+Button:hover {
+  box-shadow:
+    0 2px 0 2px var(--hover-color),
+    inset 0 2px 0 2px var(--hover-color),
+    0 0 0 2px var(--hover-color),
+    inset 0 0 0 2px var(--hover-color);
+}
+
+Button:active {
+  box-shadow:
+    0 2px 0 2px var(--accent-color),
+    inset 0 2px 0 2px var(--accent-color),
+    0 0 0 2px var(--accent-color),
+    inset 0 0 0 2px var(--accent-color);
+}
+
+/*====
+  MEDIA
+  ====*/
+
+@media screen and (max-width: 600px) {
+  body {
+    margin: 1em 2em;
+    font-size: 12px;
+  }
+
+  ul {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  button:hover {
+    box-shadow:
+      0 2px 0 2px var(--border-color),
+      inset 0 2px 0 2px var(--border-color),
+      0 0 0 2px var(--border-color),
+      inset 0 0 0 2px var(--border-color);
+  }
+}

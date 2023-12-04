@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 export default function Card({ sprite, name, onClick }) {
   return (
     <button type="button" className="card" onClick={onClick}>
-      <p>{name}</p>
       <img src={sprite} alt={name} />
+      <p>{name}</p>
     </button>
   );
 }
